@@ -4099,10 +4099,9 @@ public class PackageManagerService extends IPackageManager.Stub {
 
     private boolean createIdmapForPackagePairLI(PackageParser.Package pkg,
             PackageParser.Package opkg) {
-        if (!opkg.mTrustedOverlay && compareSignatures(pkg.mSignatures, opkg.mSignatures) !=
-                PackageManager.SIGNATURE_MATCH) {
+        if (!opkg.mTrustedOverlay) {
             Slog.w(TAG, "Skipping target and overlay pair " + pkg.baseCodePath + " and " +
-                    opkg.baseCodePath + ": signatures do not match");
+                    opkg.baseCodePath + ": overlay not trusted");
             return false;
         }
         ArrayMap<String, PackageParser.Package> overlaySet = mOverlays.get(pkg.packageName);
